@@ -47,7 +47,7 @@ $(document).ready(function () {
 
 function upload(stepid, selectDay) {
 
-    var uploadCount = 0;
+    var uploadCount = 1;
 
     options = {
         url: '/imageprocess',
@@ -56,7 +56,6 @@ function upload(stepid, selectDay) {
         fileVal: 'fileVal',
         onBeforeSend: function (data, headers) {
             console.log(this, data, headers);
-            uploadCount = uploadCount+1
             debugger
             $.extend(data, { stepid: stepid, position: uploadCount, selectDay: selectDay });
 
@@ -64,6 +63,11 @@ function upload(stepid, selectDay) {
             // $.extend(headers, { Origin: 'http://127.0.0.1' }); // 可以扩展此对象来控制上传头部
 
             // return false; // 阻止文件上传
+        },
+    onSuccess: function (ret) {
+        console.log(this, ret);
+        uploadCount = uploadCount + 1
+            // return true; // 阻止默认行为，不使用默认的成功态
         }
     }
 
