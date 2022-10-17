@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} - My Flask Application</title>
+    <link rel="stylesheet" type="text/css" href="/static/content/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/static/content/site.css" />
+    <script src="/static/scripts/modernizr-2.6.2.js"></script>
+
+    <link href="../static/content/weui.min.css" rel="stylesheet" />
+    <script src="../static/scripts/weui.min.js"></script>
+
+
+    <script src="/static/scripts/jquery-1.10.2.js"></script>
+    <script src="/static/scripts/bootstrap.js"></script>
+    <script src="/static/scripts/respond.js"></script>
+    <script src="../static/scripts/xuexi.js"></script>
+
+</head>
+
+<body>
+    <div class="page">
+        <div style="display: none;" role="dialog" aria-labelledby="galleryImg" aria-hidden="true" aria-modal="true" class="weui-gallery" id="gallery">
+            <span id="galleryImg" alt="图片详情" role="img" class="weui-gallery__img" style="background-image: url(./display/img/1.jpeg);"></span>
+            <div class="weui-gallery__opr">
+                <a role="button" aria-label="删除" href="javascript:" class="weui-gallery__del">
+                    <i class="weui-icon-delete weui-icon_gallery-delete"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        {% block content %}{% endblock %}
+        <hr />
+        <footer>
+            <p>明宇轩不要玩小鸟</p>
+        </footer>
+    </div>
+
+    <script>
+
+    </script>
+    {% block scripts %}{% endblock %}
+
+</body>
+</html>

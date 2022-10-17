@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="jumbotron">
+    <h1>{{title}}</h1>
+
+    <p>
+        <ul class="weui-steps weui-steps_vertical">
+            {%  for item in steps %}
+            <li class="weui-steps__item">
+                <div class="weui-steps__item__inner">
+                    <strong class="weui-steps__item__title">{{item.ID}} {{item.任务}}</strong>
+                    
+                    <!--<p class="weui-steps__item__desc">{{item.备注}}</p>-->
+
+                    <div class="weui-cells weui-cells_form" id="uploader{{item.ID}}">
+                        <div class="weui-cell">
+                            <div class="weui-cell__bd">
+                                <div class="weui-uploader">
+                                    <div class="weui-uploader__bd">
+                                        <ul class="weui-uploader__files" id="{{item.ID}}">
+                                            {%  for aPic in item.图片 %}
+                                            <li class="weui-uploader__file" data-id="" {{item.ID}} " style=" width: 90px;height: 90px;background-image: url(&quot; /display/img/{{selectDay }}/{{aPic.name}}&quot;); ">
+                                                <span style="color:{{aPic.color}};">{{aPic.ctime}}</span><br />
+                                                <span float:right>{{aPic.yongshi}}</span>
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                        <div class="weui-uploader__input-box">
+                                            <input id="uploaderInput{{item.ID}}" class="weui-uploader__input" accept="image/*,application/zip"  type="file" multiple="" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        upload({{ item.ID }}, {{ selectDay }})
+                    </script>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+
+    </p>
+
+</div>
+
+
+{% endblock %}
