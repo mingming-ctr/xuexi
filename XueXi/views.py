@@ -16,6 +16,10 @@ import glob
 import  time
 from decimal import *
 
+import stat
+
+
+
 
 
 @app.route('/everyday/<day>')
@@ -36,6 +40,7 @@ def everyday(day):
         imgs = glob.glob(root)
         item["图片"]=[]
         miao2=0
+        item["imgcount"]=len(imgs)
         for filename in imgs:
             print(filename)            
             fileShort=os.path.basename(filename);
@@ -139,6 +144,7 @@ def image_preprocess():
     type=request.form["type"];
     size=request.form["size"];
     stepid=request.form["stepid"];
+    imgcount=request.form["imgcount"];
     position=request.form["position"];
     selectDay=request.form["selectDay"];
 
@@ -149,7 +155,7 @@ def image_preprocess():
     imgs = glob.glob(root)  
     ext=os.path.splitext(name)[-1]#扩展名是上传文件名的扩展名
 
-    shortName = stepid+"-"+str(len(imgs)+int(position)).zfill(2)+ext
+    shortName = stepid+"-"+str(int(position)).zfill(2)+ext
 
     print(data)
     print(image)
@@ -160,6 +166,7 @@ def image_preprocess():
     dir = create_folder("每日打卡",selectDay)
     file_full =os.path.join(dir,shortName)
     image.save(file_full)
+    os.chmod(file_full, stat.S_IREAD)
 
     sqlInsert = r"""
 
