@@ -45,9 +45,9 @@ $(document).ready(function () {
 });
 
 
-function upload(stepid, selectDay) {
+function upload(stepid, imgcount, selectDay) {
 
-    var uploadCount = 1;
+    var uploadCount = imgcount;
 
     options = {
         url: '/imageprocess',
@@ -56,8 +56,9 @@ function upload(stepid, selectDay) {
         fileVal: 'fileVal',
         onBeforeSend: function (data, headers) {
             console.log(this, data, headers);
+            uploadCount = uploadCount + 1
             debugger
-            $.extend(data, { stepid: stepid, position: uploadCount, selectDay: selectDay });
+            $.extend(data, { stepid: stepid, position: uploadCount, imgcount: imgcount, selectDay: selectDay });
 
             // $.extend(data, { test: 1 }); // 可以扩展此对象来控制上传参数
             // $.extend(headers, { Origin: 'http://127.0.0.1' }); // 可以扩展此对象来控制上传头部
@@ -66,7 +67,6 @@ function upload(stepid, selectDay) {
         },
     onSuccess: function (ret) {
         console.log(this, ret);
-        uploadCount = uploadCount + 1
             // return true; // 阻止默认行为，不使用默认的成功态
         }
     }
